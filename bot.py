@@ -103,7 +103,7 @@ MESSAGES = {
         f"👨‍💻 *Created by:*\n"
         f"✨ {CREATOR} ✨\n"
         f"{SEPARATOR}\n\n"
-        "🔗 [GitHub](https://github.com)"
+        "🔗 [GitHub](https://github.com/islamibragimov/url-downloader-bot)"
     ),
     "goodbye": "👋 *Bot stopped*\n\nThanks for using Video Downloader Bot!\nSend /start to restart.",
 }
