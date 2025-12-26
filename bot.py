@@ -15,7 +15,6 @@ from telegram.ext import Application, CommandHandler, MessageHandler, ContextTyp
 
 load_dotenv()
 
-# Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -121,7 +120,7 @@ def get_help_keyboard() -> InlineKeyboardMarkup:
     keyboard = [
         [
             InlineKeyboardButton("🔗 Send URL", callback_data="send_url"),
-            InlineKeyboardButton("📖 Documentation", url="https://github.com"),
+            InlineKeyboardButton("📖 Documentation", url="https://github.com/islamibragimov/url-downloader-bot"),
         ],
         [
             InlineKeyboardButton("✨ Supported Sites", callback_data="sites"),
@@ -293,7 +292,6 @@ async def process_download(update: Update, context: ContextTypes.DEFAULT_TYPE, u
     if status_msg is None:
         status_msg = await update.message.reply_text(MESSAGES["downloading"], parse_mode=ParseMode.MARKDOWN)
     
-    # Store URL in context for retry
     context.user_data["last_url"] = url
     
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -342,7 +340,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Handle all inline button callbacks"""
     query = update.callback_query
-    await query.answer()  # Remove loading animation
+    await query.answer() 
 
     if query.data == "send_url":
         await query.edit_message_text(
@@ -363,7 +361,6 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             MESSAGES["goodbye"],
             parse_mode=ParseMode.MARKDOWN,
         )
-        # Clear user data
         context.user_data.clear()
 
     elif query.data == "back_to_help":
@@ -390,13 +387,10 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             )
             return
 
-        # Delete the old message
         await query.delete_message()
         
-        # Create new download status message
         status_msg = await query.message.reply_text(MESSAGES["downloading"], parse_mode=ParseMode.MARKDOWN)
         
-        # Simulate update object for process_download
         class FakeUpdate:
             def __init__(self, message):
                 self.message = message
