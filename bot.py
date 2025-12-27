@@ -32,7 +32,7 @@ SEPARATOR = "━" * 30
 
 MESSAGES = {
     "start": (
-        "👋 *Welcome to Video Downloader Bot!*\n\n"
+        "👋 *Welcome to URL Downloader Bot!*\n\n"
         "🎬 Send me a URL and I'll download it for you.\n\n"
         "✅ *Works best with:*\n"
         "• YouTube, TikTok, Instagram\n"
